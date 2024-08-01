@@ -1,12 +1,9 @@
 package com.service.customer.controller;
 
-import com.service.customer.model.entity.CustomerEntity;
 import com.service.customer.model.request.CustomerRequest;
 import com.service.customer.model.response.CustomerResponse;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -17,29 +14,29 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/customer")
-@Api(value = "Customer Management System")
+@Tag(name = "Customer", description = "Customer Service")
 public interface ICustomerController {
 
-    @ApiOperation(value = "Get a customer by Id")
+    @Operation(summary = "Get by ID", description = "Get a customer by Id")
     @GetMapping("/{id}")
     ResponseEntity<CustomerResponse> findById(@PathVariable UUID id);
 
-    @ApiOperation(value = "Get all customer's")
+    @Operation(summary = "Get all", description = "Get all customer's")
     @GetMapping
     ResponseEntity<Page<CustomerResponse>> findAll(Pageable pageable);
 
-    @ApiOperation(value = "Create a customer")
+    @Operation(summary = "Create", description = "Create a customer")
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<CustomerResponse> create(@RequestBody CustomerRequest request);
 
-    @ApiOperation(value = "Update a customer")
+    @Operation(summary = "Update", description = "Update a customer")
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     ResponseEntity<CustomerResponse> update(@RequestBody CustomerRequest request,
                                             @PathVariable UUID id);
 
-    @ApiOperation(value = "Delete a customer")
+    @Operation(summary = "Delete", description = "Delete a customer")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     ResponseEntity<CustomerResponse> delete(@PathVariable UUID id);

@@ -3,6 +3,8 @@ package com.service.customer.controller.impl;
 import com.service.customer.controller.ICustomerController;
 import com.service.customer.model.request.CustomerRequest;
 import com.service.customer.model.response.CustomerResponse;
+import com.service.customer.service.impl.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,9 @@ import java.util.UUID;
 
 @Component
 public class CustomerController implements ICustomerController {
+
+    @Autowired
+    CustomerService service;
 
     @Override
     public ResponseEntity<CustomerResponse> findById(UUID id) {
