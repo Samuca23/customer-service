@@ -9,11 +9,23 @@ import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public record CustomerRequest(
-        UUID id,
-        @NotBlank @Size(max = 255) String name,
-        @NotNull LocalDate dateOfBirth,
-        @NotBlank String cpfCnpj,
-        @NotBlank String fone) {
+
+public record CustomerRequest(UUID id,
+                              @NotBlank @Max(255) String name,
+                              @NotBlank @Max(255) String email,
+                              @NotNull LocalDate dateOfBirth,
+                              @NotBlank String cpfCnpj,
+                              @NotBlank String fone) {
+
+    public static CustomerEntity parse(CustomerRequest request) {
+        return CustomerEntity.builder()
+                .id(request.id())
+                .name(request.name())
+                .email(request.email())
+                .dateOfBirth(request.dateOfBirth())
+                .cpfCnpj(request.cpfCnpj())
+                .fone(request.fone())
+                .build();
+    }
 
 }
