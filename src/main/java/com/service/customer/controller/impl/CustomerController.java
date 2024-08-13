@@ -7,6 +7,7 @@ import com.service.customer.service.impl.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -20,17 +21,17 @@ public class CustomerController implements ICustomerController {
 
     @Override
     public ResponseEntity<CustomerResponse> findById(UUID id) {
-        return null;
+        return ResponseEntity.ok(CustomerResponse.parse(service.findById(id)));
     }
 
     @Override
     public ResponseEntity<Page<CustomerResponse>> findAll(Pageable pageable) {
-        return null;
+        return ResponseEntity.ok(service.findAll(pageable).map(CustomerResponse::parse));
     }
 
     @Override
     public ResponseEntity<CustomerResponse> create(CustomerRequest request) {
-        return null;
+        return ResponseEntity.status(HttpStatus.CREATED).body(CustomerResponse.parse(service.create(CustomerRequest.parse(request))));
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.service.customer.controller;
 import com.service.customer.model.request.CustomerRequest;
 import com.service.customer.model.response.CustomerResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +24,7 @@ public interface ICustomerController {
 
     @Operation(summary = "Get all", description = "Get all customer's")
     @GetMapping
-    ResponseEntity<Page<CustomerResponse>> findAll(Pageable pageable);
+    ResponseEntity<Page<CustomerResponse>> findAll(@Parameter(hidden = true) Pageable pageable);
 
     @Operation(summary = "Create", description = "Create a customer")
     @PostMapping()
