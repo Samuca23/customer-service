@@ -13,6 +13,7 @@ public record CustomerResponse(UUID id,
                                LocalDate dateOfBirth,
                                String cpfCnpj,
                                String fone,
+                               boolean deleted,
                                LocalDateTime createAt,
                                LocalDateTime updateAt) {
 
@@ -23,6 +24,7 @@ public record CustomerResponse(UUID id,
                 entity.getDateOfBirth(),
                 entity.getCpfCnpj(),
                 entity.getFone(),
+                entity.isDeleted(),
                 entity.getCreateAt(),
                 entity.getUpdateAt());
     }
