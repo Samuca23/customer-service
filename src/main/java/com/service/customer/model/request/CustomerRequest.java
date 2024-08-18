@@ -16,7 +16,7 @@ public record CustomerRequest(UUID id,
                               @NotNull LocalDate dateOfBirth,
                               @NotBlank String cpfCnpj,
                               @NotBlank String fone,
-                              @NotNull boolean active) {
+                              boolean active) {
 
     public static CustomerEntity parse(CustomerRequest request) {
         return CustomerEntity.builder()
