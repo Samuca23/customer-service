@@ -15,7 +15,8 @@ public record CustomerRequest(UUID id,
                               @NotBlank @Max(255) String email,
                               @NotNull LocalDate dateOfBirth,
                               @NotBlank String cpfCnpj,
-                              @NotBlank String fone) {
+                              @NotBlank String fone,
+                              @NotNull boolean active) {
 
     public static CustomerEntity parse(CustomerRequest request) {
         return CustomerEntity.builder()
@@ -25,6 +26,7 @@ public record CustomerRequest(UUID id,
                 .dateOfBirth(request.dateOfBirth())
                 .cpfCnpj(request.cpfCnpj())
                 .fone(request.fone())
+                .active(request.active())
                 .build();
     }
 

@@ -13,8 +13,10 @@ public record CustomerResponse(UUID id,
                                LocalDate dateOfBirth,
                                String cpfCnpj,
                                String fone,
+                               boolean active,
                                LocalDateTime createAt,
-                               LocalDateTime updateAt) {
+                               LocalDateTime updateAt,
+                               boolean deleted) {
 
     public static CustomerResponse parse (CustomerEntity entity) {
         return new CustomerResponse(entity.getId(),
@@ -23,8 +25,10 @@ public record CustomerResponse(UUID id,
                 entity.getDateOfBirth(),
                 entity.getCpfCnpj(),
                 entity.getFone(),
+                entity.isActive(),
                 entity.getCreateAt(),
-                entity.getUpdateAt());
+                entity.getUpdateAt(),
+                entity.isDeleted());
     }
 
 }

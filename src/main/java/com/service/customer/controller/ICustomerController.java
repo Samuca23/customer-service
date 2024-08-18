@@ -1,6 +1,7 @@
 package com.service.customer.controller;
 
 import com.service.customer.model.request.CustomerRequest;
+import com.service.customer.model.request.CustomerStatusRequest;
 import com.service.customer.model.response.CustomerResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -40,6 +41,12 @@ public interface ICustomerController {
     @Operation(summary = "Delete", description = "Delete a customer")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    ResponseEntity<CustomerResponse> delete(@PathVariable UUID id);
+    void delete(@PathVariable UUID id);
+
+    @Operation(summary = "Status", description = "Update status")
+    @PutMapping("/status/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    ResponseEntity<CustomerResponse> status(@RequestBody CustomerStatusRequest request,
+                                            @PathVariable UUID id);
 
 }

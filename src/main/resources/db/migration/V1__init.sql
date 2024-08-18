@@ -5,6 +5,7 @@ CREATE TABLE customer (
     email VARCHAR(255) NOT NULL UNIQUE,
     cpf_cnpj VARCHAR(20) NOT NULL,
     fone VARCHAR(20) NOT NULL,
+    active BOOLEAN DEFAULT TRUE,
     deleted BOOLEAN DEFAULT FALSE,
     create_at TIMESTAMP,
     update_at TIMESTAMP);

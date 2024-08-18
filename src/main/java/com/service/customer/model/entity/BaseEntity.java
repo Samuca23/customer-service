@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Data
 public abstract class BaseEntity {
 
-    private boolean deleted = false;
+    private boolean deleted = Boolean.FALSE;
 
     @CreatedDate
     @Column(name = "create_at")

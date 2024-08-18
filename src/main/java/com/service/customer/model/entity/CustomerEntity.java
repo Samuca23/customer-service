@@ -34,4 +34,6 @@ public class CustomerEntity extends BaseEntity {
     @Column(nullable = false, length = 20)
     private String fone;
 
+    private boolean active = Boolean.TRUE;
+
 }

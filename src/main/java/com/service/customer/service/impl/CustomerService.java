@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Service
@@ -35,17 +36,50 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public CustomerEntity create(CustomerEntity entity) {
-        log.info("Create a new Customer with name equals: {}", entity.getName());
+        log.info("Creating a new Customer with name equals: {}", entity.getName());
         return repository.save(entity);
     }
 
     @Override
-    public CustomerEntity update(CustomerEntity entity) {
-        return null;
+    public CustomerEntity update(UUID id, String name, String email, LocalDate dateOfBirth, String cpfCnpj, String fone) {
+        CustomerEntity entity = findById(id);
+
+        if (!entity.getName().equals(name)) {
+            entity.setName(name);
+        }
+
+        if (!entity.getEmail().equals(email)) {
+            entity.setEmail(email);
+        }
+
+        if (!entity.getDateOfBirth().equals(dateOfBirth)) {
+            entity.setDateOfBirth(dateOfBirth);
+        }
+
+        if (!entity.getCpfCnpj().equals(cpfCnpj)) {
+            entity.setCpfCnpj(cpfCnpj);
+        }
+
+        if (!entity.getFone().equals(fone)) {
+            entity.setFone(fone);
+        }
+
+        return repository.save(entity);
     }
 
     @Override
     public void delete(UUID id) {
+        log.info("Deleting a Customer with id equals: {}", id);
+        CustomerEntity entity = findById(id);
+        entity.setDeleted(Boolean.TRUE);
+        repository.save(entity);
+    }
 
+    @Override
+    public CustomerEntity status(UUID id, boolean active) {
+        log.info("Changing customer status with id: {}", id);
+        CustomerEntity entity = findById(id);
+        entity.setActive(active);
+        return  repository.save(entity);
     }
 }
